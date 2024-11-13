@@ -2,7 +2,7 @@ const teamRepository = require('../repositories/teamRepository');
 
 class TeamService {
     async getTeams() {
-        return teamRepository.getAll();
+        return await teamRepository.getAll();
     }
 }
 

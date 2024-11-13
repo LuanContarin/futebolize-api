@@ -1,12 +1,11 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require('sequelize');
+const database = require('../config/database');
 
-const Team = sequelize.define('Teams', {
+const Team = database.define('Teams', {
     id: {
-        type: DataTypes.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
     },
     name: {
         type: DataTypes.STRING,

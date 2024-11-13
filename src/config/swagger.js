@@ -12,7 +12,7 @@ const swaggerDefinition = {
 const options = {
 	definition: swaggerDefinition,
 	// Paths to files containing OpenAPI definitions
-	apis: ['src/controllers/*.js'],
+	apis: ['src/controllers/*.js', 'src/schemas/*.js'],
 };
 
 module.exports = swaggerJSDoc(options);
