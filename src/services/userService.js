@@ -1,18 +1,19 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userRepository = require('../repositories/userRepository');
-const appConfig = require('../config/app_config')
+const appConfig = require('../config/app_config');
+const ValidationError = require('../exceptions/validationError');
 
 class UserService {
     async register(username, password) {
         if (!username)
-            throw new Error('Invalid username.');
+            throw new ValidationError('Invalid username.');
         if (!password)
-            throw new Error('Invalid password.');
+            throw new ValidationError('Invalid password.');
 
         const userWithUsername = await userRepository.findByUsername(username);
         if (userWithUsername)
-            throw new Error('A user with that username already exists.');
+            throw new ValidationError('A user with that username already exists.');
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await userRepository.createUser({ username, password: hashedPassword });
@@ -22,12 +23,12 @@ class UserService {
     async login(username, password) {
         const user = await userRepository.findByUsername(username);
         if (!user) {
-            throw new Error('User not found.');
+            throw new ValidationError('User not found.');
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            throw new Error('Invalid password.');
+            throw new ValidationError('Invalid password.');
         }
 
         const token = jwt.sign({ id: user.id }, appConfig.jwt.secret_key, { expiresIn: '24h' });
