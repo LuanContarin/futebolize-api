@@ -5,9 +5,11 @@ const authenticateToken = require('../middlewares/auth');
 
 /**
  * @openapi
- * /api/users/register:
+ * /users/register:
  *   post:
  *     summary: Register an user in the system.
+ *     tags:
+ *       - Users
  *     requestBody:
  *       required: true
  *       content:
@@ -23,30 +25,35 @@ const authenticateToken = require('../middlewares/auth');
  *       201:
  *         description: User registered successfully.
  *       400:
- *         description: Validation/Application error.
+ *         description: Validation error.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Error'
+ *               $ref: '#/components/schemas/ValidationError'
+ *       500:
+ *         description: Application error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AppError'
  */
-router.post('/users/register', async (req, res) => {
+router.post('/users/register', async (req, res, next) => {
     try {
         const { username, password } = req.body;
-        const user = await userService.register(username, password);
-        if (!user)
-            res.status(400).json({ error: 'An error ocurred when creating the user.' });
-
+        await userService.register(username, password);
         res.status(201).json();
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        next(error);
     }
 });
 
 /**
  * @openapi
- * /api/users/login:
+ * /users/login:
  *   post:
  *     summary: Login as an user in the system and get the authorization token.
+ *     tags:
+ *       - Users
  *     requestBody:
  *       required: true
  *       content:
@@ -69,28 +76,36 @@ router.post('/users/register', async (req, res) => {
  *                 token:
  *                   type: string
  *       400:
- *         description: Validation/Application error.
+ *         description: Validation error.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Error'
+ *               $ref: '#/components/schemas/ValidationError'
+ *       500:
+ *         description: Application error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AppError'
  */
-router.post('/users/login', async (req, res) => {
+router.post('/users/login', async (req, res, next) => {
     try {
         const { username, password } = req.body;
         const token = await userService.login(username, password);
-        res.json({ token });
+        res.json({ token: token });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        next(error);
     }
 });
 
 /**
  * @openapi
- * /api/users:
+ * /users:
  *   get:
  *     summary: Retrieve all system users.
  *     description: Fetches a list of users from the system.
+ *     tags:
+ *       - Users
  *     security:
  *       - BearerAuth: []
  *     responses:
@@ -115,20 +130,26 @@ router.post('/users/login', async (req, res) => {
  *                         description: The user's username.
  *                         example: "exampleUser"
  *       400:
- *         description: Validation/Application error.
+ *         description: Validation error.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Error'
+ *               $ref: '#/components/schemas/ValidationError'
  *       401:
  *         description: Unauthorized. Invalid or missing Bearer token.
+ *       500:
+ *         description: Application error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AppError'
  */
-router.get('/users', authenticateToken, async (req, res) => {
+router.get('/users', authenticateToken, async (req, res, next) => {
     try {
         const users = await userService.getUsers();
         res.json({ users: users });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        next(error);
     }
 });
 
