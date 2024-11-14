@@ -7,6 +7,7 @@ const teamController = require("./controllers/teamController");
 const userController = require("./controllers/userController");
 const errorHandler = require('./middlewares/errorHandler');
 const teamMoreInfoControler = require("./controllers/teamMoreInfoController");
+const playerController = require("./controllers/playerController");
 
 
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/api", userController);
 app.use("/api", teamController);
 app.use("/api", teamMoreInfoControler);
+app.use("/api", playerController);
 
 // Custom error handler
 app.use(errorHandler);
