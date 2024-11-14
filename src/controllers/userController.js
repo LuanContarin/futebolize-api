@@ -8,6 +8,8 @@ const authenticateToken = require('../middlewares/auth');
  * /users/register:
  *   post:
  *     summary: Register an user in the system.
+ *     tags:
+ *       - Users
  *     requestBody:
  *       required: true
  *       content:
@@ -50,6 +52,8 @@ router.post('/users/register', async (req, res, next) => {
  * /users/login:
  *   post:
  *     summary: Login as an user in the system and get the authorization token.
+ *     tags:
+ *       - Users
  *     requestBody:
  *       required: true
  *       content:
@@ -100,6 +104,8 @@ router.post('/users/login', async (req, res, next) => {
  *   get:
  *     summary: Retrieve all system users.
  *     description: Fetches a list of users from the system.
+ *     tags:
+ *       - Users
  *     security:
  *       - BearerAuth: []
  *     responses:

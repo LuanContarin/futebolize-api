@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const teamService = require('../services/teamService');
+const authenticateToken = require('../middlewares/auth');
 
 /**
  * @openapi
  * /teams:
  *   get:
  *     summary: Retrieve a list of brazilian soccer teams.
+ *     tags:
+ *       - Teams
  *     responses:
  *       200:
  *         description: Fetches a list of brazilian soccer teams.
@@ -65,6 +68,10 @@ router.get('/teams', async (req, res, next) => {
  * /teams:
  *   post:
  *     summary: Register a team in the system.
+ *     tags:
+ *       - Teams
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -97,7 +104,7 @@ router.get('/teams', async (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/AppError'
  */
-router.post('/teams', async (req, res, next) => {
+router.post('/teams', authenticateToken, async (req, res, next) => {
     try {
         await teamService.create(req.body);
         res.status(201).json();
@@ -111,6 +118,10 @@ router.post('/teams', async (req, res, next) => {
  * /teams:
  *   put:
  *     summary: Update a team in the system.
+ *     tags:
+ *       - Teams
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -146,7 +157,7 @@ router.post('/teams', async (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/AppError'
  */
-router.put('/teams', async (req, res, next) => {
+router.put('/teams', authenticateToken, async (req, res, next) => {
     try {
         await teamService.update(req.body);
         res.status(201).json();
@@ -160,6 +171,10 @@ router.put('/teams', async (req, res, next) => {
  * /teams/{id}:
  *   delete:
  *     summary: Delete a team in the system.
+ *     tags:
+ *       - Teams
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -183,7 +198,7 @@ router.put('/teams', async (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/AppError'
  */
-router.delete('/teams/:id', async (req, res, next) => {
+router.delete('/teams/:id', authenticateToken, async (req, res, next) => {
     try {
         await teamService.delete(req.params.id);
         res.status(204).send();
