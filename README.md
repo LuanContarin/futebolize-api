@@ -25,6 +25,7 @@
 - **bcrypt:** Secure password hashing.
 - **jsonwebtoken:** Token-based authentication.
 - **dotenv:** Environment variable management.
+- **dotenv-cli:** Easy `.env` file handling for different environments in scripts.
 - **swagger-jsdoc** & **swagger-ui-express:** API documentation tools.
 - **Docker:** Containerization for consistent and scalable deployments.
 
@@ -47,5 +48,5 @@
     docker run -p 8080:8080 --name futebolize-api-container futebolize-api
     ```
 4. **Access the API:**
-    - The API will be running at http://localhost:8080
-    - The API will be running at http://localhost:8080/api-docs.
+    - The API will be running at `http://localhost:8080`
+    - The API will be running at `http://localhost:8080/api-docs`.
