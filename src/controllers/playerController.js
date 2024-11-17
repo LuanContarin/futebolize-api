@@ -45,6 +45,12 @@ const authenticateToken = require('../middlewares/auth');
  *                         type: string
  *                         nullable: true
  *                         example: Brasil
+ *                       createdAt:
+ *                         type: string
+ *                         example: "2024-11-13T13:52:12.000Z"
+ *                       updatedAt:
+ *                         type: string
+ *                         example: "2024-11-13T13:52:12.000Z"
  *       400:
  *         description: Validation error.
  *         content:
@@ -93,6 +99,10 @@ router.get('/players', async (req, res, next) => {
  *               team:
  *                  type: string
  *               country:
+ *                  type: string
+ *               createdAt:
+ *                  type: string
+ *               updatedAt:
  *                  type: string
  *     responses:
  *       201:

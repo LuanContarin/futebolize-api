@@ -41,6 +41,12 @@ const authenticateToken = require('../middlewares/auth');
  *                         type: integer
  *                         nullable: true
  *                         example: 1914
+ *                       createdAt:
+ *                         type: string
+ *                         example: "2024-11-13T13:52:12.000Z"
+ *                       updatedAt:
+ *                         type: string
+ *                         example: "2024-11-13T13:52:12.000Z"
  *       400:
  *         description: Validation error.
  *         content:

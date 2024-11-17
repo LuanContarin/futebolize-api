@@ -4,8 +4,9 @@
   "description": "RESTful API for soccer management",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "dotenv -e src/environment/.env.development -- node src/app.js",
+    "start:docker": "dotenv -e src/environment/.env.docker -- node src/app.js",
+    "start": "npm run start:dev"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +21,8 @@
     "sqlite3": "^5.1.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.4.2"
   }
 }

@@ -8,6 +8,13 @@ const appConfig = {
             secret_key: process.env.JWT_SECRET_KEY,
         },
     },
+    production: {
+        url: process.env.BASE_URL,
+        port: process.env.PORT,
+        jwt: {
+            secret_key: process.env.JWT_SECRET_KEY,
+        },
+    },
 };
 
 // Determine the current environment

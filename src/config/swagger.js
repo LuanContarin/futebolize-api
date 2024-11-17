@@ -7,7 +7,7 @@ const swaggerDefinition = {
 	info: {
 		title: 'Futebolize API',
 		version: '1.0.0',
-		description: 'API for soccer management. Provides endpoints to manage teams, players, and matches, enabling seamless integration with front-end applications and other platforms.',
+		description: 'API for soccer management. Provides endpoints to manage teams, players, and referees, enabling seamless integration with front-end applications and other platforms.',
 	},
 };
 

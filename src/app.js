@@ -1,4 +1,3 @@
-
 const express = require("express");
 const swaggerUI = require("swagger-ui-express");
 const appConfig = require("./config/app_config");
@@ -8,8 +7,7 @@ const userController = require("./controllers/userController");
 const errorHandler = require('./middlewares/errorHandler');
 const teamMoreInfoControler = require("./controllers/teamMoreInfoController");
 const playerController = require("./controllers/playerController");
-
-
+const refereeController = require("./controllers/refereeController");
 
 const URL = appConfig.url;
 const PORT = appConfig.port;
@@ -20,6 +18,7 @@ app.use("/api", userController);
 app.use("/api", teamController);
 app.use("/api", teamMoreInfoControler);
 app.use("/api", playerController);
+app.use("/api", refereeController);
 
 // Custom error handler
 app.use(errorHandler);

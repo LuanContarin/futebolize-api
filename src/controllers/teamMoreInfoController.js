@@ -11,6 +11,8 @@ router.use(bodyParser.urlencoded({ extended: true }));
  * /api/teams/moreinfo:
  *   get:
  *     summary: Retrieve more information of Brazilian soccer team.
+ *     tags:
+ *       - Teams
  *     requestBody:
  *       required: true
  *       content:
@@ -81,7 +83,9 @@ router.get("/teams/moreinfo", async (req, res) => {
  * @openapi
  * /api/teams/moreinfo:
  *   post:
- *     summary: Register more information to brazilian soccer team
+ *     summary: Register more information to brazilian soccer team.
+ *     tags:
+ *       - Teams
  *     requestBody:
  *       required: true
  *       content:
