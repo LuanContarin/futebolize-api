@@ -49,4 +49,4 @@
     ```
 4. **Access the API:**
     - The API will be running at `http://localhost:8080`
-    - The API will be running at `http://localhost:8080/api-docs`.
+    - The API documentation will be running at `http://localhost:8080/api-docs`.
